@@ -67,7 +67,6 @@ lotr_movie = video.Film("The Lord of the Rings: The Two Towers",
                           "https://www.youtube.com/watch?v=2dlRvAjU_RI",
                           "2002")
 
-
 films = (inception, batman_dark, transformers, matrix_movie, heat_movie, 
          lotr_movie)
 collection_listing.open_films_page(films)
