@@ -2,7 +2,6 @@ import webbrowser
 import os
 import re
 
-
 # Styles and scripting for the page
 main_page_head = '''
 <!DOCTYPE html>
@@ -121,17 +120,35 @@ main_page_content = '''
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="collection_listing.html">
             <!-- Icon on the left of site name -->
               <img src="http://www.free-icons-download.net/images/movie-icon-72062.png" 
                  alt="" width="25" height="25" />  Films Vault - Trailers and Information</a>
           </div>
         </div>
       </div>
+
+    <!-- Begin two columns design -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-7 col-sm-6 col-lg-8" style="background-color:red;">
+                {film_tiles}
+            </div>
+            <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:lavender;">
+                Top Rated Movies
+            </div>
     </div>
-    <div class="container text-center">   
-      {film_tiles}
-    </div> 
+  
+    </div>
+    <!-- End two columns design -->
+    
+    <!-- <div class="container text-center"> -->   
+    <!--  {film_tiles} -->
+    <!-- </div> -->
+
+
+</div>
+ 
     <!-- Here goes the code for the footer -->
     <div>
        <footer class="container-fluid text-center">
@@ -146,7 +163,8 @@ main_page_content = '''
 
 # A single film entry html template
 film_tile_content = '''
-<div class="col-md-5 col-lg-4 film-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<!-- <div class="col-md-5 col-lg-4 film-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer"> -->
+<div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster}" width="220" height="342">
     <a href="#" data-toggle="popover" title="Release year: {film_release}" data-content="{film_storyline}"><h2>{film_title}</h2></a>
 </div>
