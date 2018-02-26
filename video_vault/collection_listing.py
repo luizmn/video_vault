@@ -135,7 +135,7 @@ main_page_content = '''
                 {film_tiles}
             </div>
             <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:lavender;">
-                Top Rated Movies
+                Movies Search
             </div>
     </div>
   

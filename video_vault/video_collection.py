@@ -1,9 +1,9 @@
 #Here you can store the information of the films
-
 import video 
 # contains classes used to define video  
 import collection_listing
 # creates a html page with movies/shows defined in this file
+
 
 
 inception = video.Film("Inception",
