@@ -1,0 +1,12 @@
+https://stackoverflow.com/questions/11688978/api-or-any-other-way-to-access-imdb-top-250-list
+
+https://www.imdb.com/interfaces/
+
+http://api.myapifilms.com/imdb.do
+
+https://www.imdb.com/chart/top
+
+https://datascientistsblog.wordpress.com/2017/03/17/top-rated-movies-imdb-webscrape/
+
+https://bobbelderbos.com/2016/02/movie-site-in-minute-omdb-api-python/
+
