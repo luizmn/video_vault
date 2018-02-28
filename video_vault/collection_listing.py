@@ -201,7 +201,6 @@ def open_films_page(films):
     # Replace the film tiles placeholder generated content
     rendered_content = main_page_content.format(
         film_tiles=create_film_tiles_content(films))
-
     
     # Output the file
     output_file.write(main_page_head + rendered_content)
