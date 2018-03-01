@@ -1,8 +1,9 @@
 #Here you can store the information of the films
 import video 
 # contains classes used to define video  
-import collection_listing_2
+import collection_listing
 # creates a html page with movies/shows defined in this file
+import requests, json
 
 
 
@@ -69,4 +70,14 @@ lotr_movie = video.Film("The Lord of the Rings: The Two Towers",
 
 films = (inception, batman_dark, transformers, matrix_movie, heat_movie, 
          lotr_movie)
+
+
+
+# Begin top_Rated list filling
+response = requests.get("http://api.myapifilms.com/imdb/top?start=1&end=10&token=2bc908e5-4c25-458b-8653-b4748c2b1975&format=json&data=0")
+top_list = json.loads(response.content)
+top_rated = json.dumps(top_list[])
+print "top rated now: " + (top_rated)
+        
+# End  top_Rated list filling
 collection_listing.open_films_page(films)

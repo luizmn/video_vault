@@ -2,6 +2,9 @@ import webbrowser
 import os
 import re
 
+global top_rated
+top_rated = 1
+
 # Styles and scripting for the page
 main_page_head = '''
 <!DOCTYPE html>
@@ -135,7 +138,8 @@ main_page_content = '''
                 {film_tiles}
             </div>
             <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:lavender;">
-                Movies Search
+                Top 10 Movies
+                {top_rated_tiles}
             </div>
     </div>
   
@@ -170,6 +174,12 @@ film_tile_content = '''
 </div>
 '''
 
+film_tile_top_rated = '''
+<div class="col-sm-6 film-tile text-center">
+    <img src="{poster}" width="55" height="85">
+    <h2>{film_title}</h2>
+</div>
+'''
 
 def create_film_tiles_content(films):
     # The HTML content for this section of the page
@@ -193,6 +203,18 @@ def create_film_tiles_content(films):
         )
     return content
 
+# create 10 top rated movies list
+def create_film_tiles_toprated(top_rated):
+    # The HTML content for this section of the page
+    toplist = ''
+    for toprated in top_rated:
+        # Append the tile for the film with its content filled in
+        top_list += film_tile_toprated.format(
+            top_rated_title=top_rated.title,
+            top_rated_poster=top_rated.urlposter,
+            top_rated_release=top_rated.year
+        )
+    return toplist
 
 def open_films_page(films):
     # Create or overwrite the output file
@@ -200,7 +222,8 @@ def open_films_page(films):
 
     # Replace the film tiles placeholder generated content
     rendered_content = main_page_content.format(
-        film_tiles=create_film_tiles_content(films))
+        film_tiles=create_film_tiles_content(films),
+        top_rated_tiles=create_film_tiles_toprated(top_rated))
     
     # Output the file
     output_file.write(main_page_head + rendered_content)
