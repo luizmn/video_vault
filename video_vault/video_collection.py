@@ -1,7 +1,7 @@
 #Here you can store the information of the films
 import video 
 # contains classes used to define video  
-import collection_listing
+import collection_listing_2
 # creates a html page with movies/shows defined in this file
 
 

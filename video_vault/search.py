@@ -24,3 +24,4 @@ def top_rated:
     for item in toprated["data"]["movies"]:
         print "Title: " + item['title']
         print "Release year: " + item['year']
+        print "Poster: " + item['urlPoster']
