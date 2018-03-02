@@ -1,9 +1,10 @@
 import webbrowser
 import os
 import re
+import requests, json
 
-global top_rated
-top_rated = 1
+#global top_rated
+#top_rated = 1
 
 # Styles and scripting for the page
 main_page_head = '''
@@ -138,7 +139,7 @@ main_page_content = '''
                 {film_tiles}
             </div>
             <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:lavender;">
-                Top 10 Movies
+                Top 10 Movies (from IMDB)
                 {top_rated_tiles}
             </div>
     </div>
@@ -146,11 +147,6 @@ main_page_content = '''
     </div>
     <!-- End two columns design -->
     
-    <!-- <div class="container text-center"> -->   
-    <!--  {film_tiles} -->
-    <!-- </div> -->
-
-
 </div>
  
     <!-- Here goes the code for the footer -->
@@ -174,16 +170,38 @@ film_tile_content = '''
 </div>
 '''
 
-film_tile_top_rated = '''
-<div class="col-sm-6 film-tile text-center">
-    <img src="{poster}" width="55" height="85">
-    <h2>{film_title}</h2>
-</div>
-'''
+# Get top 10 movies from IMDB via myapifilms API
+response = requests.get("http://api.myapifilms.com/imdb/top?start=1&end=10&token=2bc908e5-4c25-458b-8653-b4748c2b1975&format=json&data=0")
+top_rated = json.loads(response.content)
+
+top_content = ''
+for item in top_rated["data"]["movies"]:
+    # Append the tile for the film with its content filled in
+    top_content += toprated_tile_content.format(
+        top_ranking=item['ranking'],
+        top_title=item['title'],
+        top_year=item['year']
+    )
+
+    toprated_tile_content += '''
+    <div class="col-sm-6 film-tile text-center">
+            <tr>
+                <td>{top_ranking}</td>
+                <td>{top_title}</td>
+                <td>{top_year}</td>
+            </tr>
+    </div>
+    '''
+
+
+# Get top 10 movies from IMDB via myapifilms API
+response = requests.get("http://api.myapifilms.com/imdb/top?start=1&end=10&token=2bc908e5-4c25-458b-8653-b4748c2b1975&format=json&data=0")
+top_rated = json.loads(response.content)
 
 def create_film_tiles_content(films):
     # The HTML content for this section of the page
     content = ''
+    top_content = ''
     for film in films:
         # Extract the youtube ID from the url
         youtube_id_match = re.search(
@@ -201,20 +219,8 @@ def create_film_tiles_content(films):
             trailer_youtube_id=trailer_youtube_id,
             film_release=film.release
         )
+    
     return content
-
-# create 10 top rated movies list
-def create_film_tiles_toprated(top_rated):
-    # The HTML content for this section of the page
-    toplist = ''
-    for toprated in top_rated:
-        # Append the tile for the film with its content filled in
-        top_list += film_tile_toprated.format(
-            top_rated_title=top_rated.title,
-            top_rated_poster=top_rated.urlposter,
-            top_rated_release=top_rated.year
-        )
-    return toplist
 
 def open_films_page(films):
     # Create or overwrite the output file
@@ -222,8 +228,7 @@ def open_films_page(films):
 
     # Replace the film tiles placeholder generated content
     rendered_content = main_page_content.format(
-        film_tiles=create_film_tiles_content(films),
-        top_rated_tiles=create_film_tiles_toprated(top_rated))
+        film_tiles=create_film_tiles_content(films))
     
     # Output the file
     output_file.write(main_page_head + rendered_content)
