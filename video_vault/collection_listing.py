@@ -140,7 +140,7 @@ main_page_content = '''
             </div>
             <div class="col-xs-5 col-sm-6 col-lg-4" style="background-color:lavender;">
                 Top 10 Movies (from IMDB)
-                {top_rated_tiles}
+                {top_content}
             </div>
     </div>
   
@@ -163,40 +163,51 @@ main_page_content = '''
 
 # A single film entry html template
 film_tile_content = '''
-<!-- <div class="col-md-5 col-lg-4 film-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer"> -->
 <div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster}" width="220" height="342">
     <a href="#" data-toggle="popover" title="Release year: {film_release}" data-content="{film_storyline}"><h2>{film_title}</h2></a>
 </div>
 '''
 
+# toprated_tile_content += '''
+    #<div class="col-sm-6 film-tile text-center">
+#        <tr>
+#            <td>{top_ranking}</td>
+#            <td>{top_title}</td>
+#            <td>{top_year}</td>
+#        </tr>
+#    </div>'''
+    
 # Get top 10 movies from IMDB via myapifilms API
 response = requests.get("http://api.myapifilms.com/imdb/top?start=1&end=10&token=2bc908e5-4c25-458b-8653-b4748c2b1975&format=json&data=0")
 top_rated = json.loads(response.content)
+
 
 top_content = ''
+
+print "content"
+print top_content
+
+print "TOP RATED"
+print top_rated
+
+
 for item in top_rated["data"]["movies"]:
     # Append the tile for the film with its content filled in
-    top_content += toprated_tile_content.format(
-        top_ranking=item['ranking'],
-        top_title=item['title'],
-        top_year=item['year']
+    top_content += top_content.format(
+        "<tr><td>"+item['ranking']+"</td><td>"+item['title']+"</td><td>"+item['year']+"</td></tr>"
     )
 
-    toprated_tile_content += '''
-    <div class="col-sm-6 film-tile text-center">
-            <tr>
-                <td>{top_ranking}</td>
-                <td>{top_title}</td>
-                <td>{top_year}</td>
-            </tr>
-    </div>
-    '''
+#for item in top_rated["data"]["movies"]:
+#        print "<tr><td>"
+#        print item['ranking']
+#        print "</td><td>"
+#        print item['title']
+#        print "</td><td>"
+#        print item['year']
+#        print "</td></tr>"
+#    }
 
-
-# Get top 10 movies from IMDB via myapifilms API
-response = requests.get("http://api.myapifilms.com/imdb/top?start=1&end=10&token=2bc908e5-4c25-458b-8653-b4748c2b1975&format=json&data=0")
-top_rated = json.loads(response.content)
 
 def create_film_tiles_content(films):
     # The HTML content for this section of the page
