@@ -48,3 +48,6 @@ python.exe collection_listing.py
 When you run the file **collection_listing.py**, Python compiles the code, reads the contents of **video_collection.py** (the file used to store all the movies and) and converts to html so in that way you can view it in your browser as a website.
 
 When the page displays (**collection_listing.html**), put the mouse pointer over the title to show the storyline and relese year. Click on the image to view its trailer.
+
+####2.2.1 Top 15 movies
+On the right side of the screen there is a list with the top 15 movies rated by IMDb Users (actually the list has 250 titles but I selected only 15). This list is extracted from [IMDB](http://www.imdb.com/) via an API from [MyApiFilms](http://api.myapifilms.com/). Click on a title and you will be redirected to the IMDB movie page containing more information.

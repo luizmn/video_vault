@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Films Vault</title>
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 80px;
+            background-color: black;
+        }
+        #trailer .modal-dialog {
+            margin-top: 200px;
+            width: 640px;
+            height: 580px;
+        }
+        .hanging-close {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            z-index: 9001;
+        }
+        #trailer-video {
+            width: 100%;
+            height: 100%;
+        }
+        .film-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .film-tile:hover {
+            background-color: #bebebe;
+            cursor: pointer;
+        }
+        .scale-media {
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        .scale-media iframe {
+            border: none;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: black;
+        }
+        /* Add a gray color and text to the footer */
+        footer {
+            background-color: white;
+            padding: 18px;
+        }
+    </style>
+    <script type="text/javascript" charset="utf-8">
+        // Pause the video when the modal is closed
+        $(document).on('click', '.hanging-close, .modal-backdrop, .modal', function (event) {
+            // Remove the src so the player itself gets removed, as this is the only
+            // reliable way to ensure the video stops playing in IE
+            $("#trailer-video-container").empty();
+        });
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.film-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the films when the page loads
+        $(document).ready(function () {
+          $('.film-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+        // Show storyline when the mouse is over the title
+        // Function copied from W3Schools.com (https://www.w3schools.com/bootstrap/bootstrap_popover.asp)
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover({
+                placement : 'top',
+                trigger : 'hover'
+            });
+        });
+    </script>
+</head>
+
+  <body>
+    <!-- Trailer Video Modal -->
+    <div class="modal" id="trailer">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <a href="#" class="hanging-close" data-dismiss="modal" aria-hidden="true"> 
+            <img src="https://lh5.ggpht.com/v4-628SilF0HtHuHdu5EzxD7WRqOrrTIDi_MhEG6_qkNtUK5Wg7KPkofp_VJoF7RS2LhxwEFCO1ICHZlc-o_=s0#w=24&h=24"/>
+          </a>
+          <div class="scale-media" id="trailer-video-container">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Content -->
+    <div class="container">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="collection_listing.html">
+            <!-- Icon on the left of site name -->
+              <img src="http://www.free-icons-download.net/images/movie-icon-72062.png" alt="" width="25" height="25" />  Films Vault - Trailers and Information</a>
+          </div>
+        </div>
+      </div>
+
+    <!-- Begin two columns design -->
+    <div class="container"><div class="row"><div class="col-xs-7 col-sm-6 col-lg-8""><div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="d3A3-zSOBT4" data-toggle="modal" data-target="#trailer">
+                            <img src="https://www.warnerbros.com/sites/default/files/styles/key_art_270x400/public/inception_keyart.jpg?itok=7jXiglyb" width="220" height="342">
+                            <a href="#" data-toggle="popover" title="Release year: 2010" data-content="A thief, who steals corporate secrets through the use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.">
+                                <h3>Inception</h3>
+                            </a>
+                        </div><div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="_PZpmTj1Q8Q" data-toggle="modal" data-target="#trailer">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg" width="220" height="342">
+                            <a href="#" data-toggle="popover" title="Release year: 2008" data-content="A gang of criminals rob a Gotham City mob bank, double-crossing and murdering each other until only the mastermind remains: the Joker, who escapes with the money. Batman, District Attorney Harvey Dent and Lieutenant Jim Gordon form an alliance to rid Gotham of organized crime.">
+                                <h3>The Dark Knight</h3>
+                            </a>
+                        </div><div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="jkNmwrTgWdI" data-toggle="modal" data-target="#trailer">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/6/66/Transformers07.jpg" width="220" height="342">
+                            <a href="#" data-toggle="popover" title="Release year: 2007" data-content="An ancient struggle between two Cybertronian races, the heroic Autobots and the evil Decepticons, comes to Earth, with a clue to the ultimate power held by a teenager.">
+                                <h3>Transformers</h3>
+                            </a>
+                        </div><div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="m8e-FF8MsqU" data-toggle="modal" data-target="#trailer">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg" width="220" height="342">
+                            <a href="#" data-toggle="popover" title="Release year: 1999" data-content="A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.">
+                                <h3>The Matrix</h3>
+                            </a>
+                        </div><div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="0xbBLJ1WGwQ" data-toggle="modal" data-target="#trailer">
+                            <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BNDc0YTQ5NGEtM2NkYS00MWRhLThiNzAtNmY3NWU3YzNkMjIyXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,661,1000_AL_.jpg" width="220" height="342">
+                            <a href="#" data-toggle="popover" title="Release year: 1995" data-content="A group of professional bank robbers start to feel the heat from police when they unknowingly leave a clue at their latest heist, while both sides attempt to find balance between their personal and professional lives.">
+                                <h3>Heat</h3>
+                            </a>
+                        </div><div class="col-sm-6 film-tile text-center" data-trailer-youtube-id="2dlRvAjU_RI" data-toggle="modal" data-target="#trailer">
+                            <img src="https://images-na.ssl-images-amazon.com/images/M/MV5BMDY0NmI4ZjctN2VhZS00YzExLTkyZGItMTJhOTU5NTg4MDU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg" width="220" height="342">
+                            <a href="#" data-toggle="popover" title="Release year: 2002" data-content="While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Sauron's new ally, Saruman, and his hordes of Isengard.">
+                                <h3>The Lord of the Rings: The Two Towers</h3>
+                            </a>
+                        </div></div>
+
+            <div class="col-xs-5 col-sm-6 col-lg-4 sidebar" style="background-color:white" text-center >
+                <h3>Top 15 Movies from IMDB</h3>
+                <table>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Title</th>
+                        <th>Release year</th>
+                    </tr>
+                
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>1 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0111161" target="_blank">The Shawshank Redemption</a></h5></td>
+            <td><h5>1994</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>2 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0068646" target="_blank">The Godfather</a></h5></td>
+            <td><h5>1972</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>3 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0071562" target="_blank">The Godfather: Part II</a></h5></td>
+            <td><h5>1974</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>4 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0468569" target="_blank">The Dark Knight</a></h5></td>
+            <td><h5>2008</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>5 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0050083" target="_blank">12 Angry Men</a></h5></td>
+            <td><h5>1957</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>6 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0108052" target="_blank">Schindler's List</a></h5></td>
+            <td><h5>1993</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>7 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0110912" target="_blank">Pulp Fiction</a></h5></td>
+            <td><h5>1994</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>8 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0167260" target="_blank">The Lord of the Rings: The Return of the King</a></h5></td>
+            <td><h5>2003</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>9 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0060196" target="_blank">The Good, the Bad and the Ugly</a></h5></td>
+            <td><h5>1966</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>10 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0137523" target="_blank">Fight Club</a></h5></td>
+            <td><h5>1999</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>11 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0120737" target="_blank">The Lord of the Rings: The Fellowship of the Ring</a></h5></td>
+            <td><h5>2001</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>12 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0109830" target="_blank">Forrest Gump</a></h5></td>
+            <td><h5>1994</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>13 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0080684" target="_blank">Star Wars: Episode V - The Empire Strikes Back</a></h5></td>
+            <td><h5>1980</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>14 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt1375666" target="_blank">Inception</a></h5></td>
+            <td><h5>2010</h5></td>
+        </tr>
+    </div>
+ <div class="col-sm-6 film-tile text-center text-primary">
+        <tr>
+            <td>15 </td>
+            <td><h5><a href="http://www.imdb.com/title/tt0167261" target="_blank">The Lord of the Rings: The Two Towers</a></h5></td>
+            <td><h5>2002</h5></td>
+        </tr>
+    </div>                 
+                </table>
+            </div>
+    </div>
+  
+    </div>
+    <!-- End two columns design -->
+    
+</div>
+ 
+    <!-- Here goes the code for the footer -->
+    <div>
+       <footer class="container-fluid text-center">
+         <p>Project Movie site <span class="glyphicon glyphicon-film"></span> | User: luiz_mn</p>
+       </footer>
+    </div>
+    <!-- Footer code end-->    
+  </body>
+</html>
